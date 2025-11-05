@@ -13,22 +13,21 @@
     <div id="sidebar" class="sidebar">
         <span class="close-btn" onclick="toggleMenu()">×</span>
         <h3 class="sidebar-title">Menú UDLA</h3>
-        <a href="#" onclick="mostrarVista('horario'); toggleMenu();">🗓️ Horario y Detalles</a>
-        <a href="#" onclick="mostrarVista('mapa'); toggleMenu();">📍 Ver Mapa</a>
-        <a href="#" onclick="cerrarSesion(); toggleMenu();" class="btn-logout">🔑 Cerrar Sesión</a>
+        <a href="#" onclick="mostrarVista('horario'); toggleMenu();"> Horario y Detalles</a>
+        <a href="#" onclick="mostrarVista('mapa'); toggleMenu();"> Ver Mapa</a>
+        <a href="#" onclick="cerrarSesion(); toggleMenu();" class="btn-logout"> Cerrar Sesión</a>
         <div class="sidebar-footer">
-            Asistente IA está flotando 🤖
         </div>
     </div>
     
     <header class="header">
-        <h1>App Académica UDLA ✨</h1>
+        <h1>Find U</h1>
     </header>
 
     <div class="main-container">
         
         <section id="login" class="panel">
-            <h2 class="panel-titulo">🔒 Iniciar Sesión UDLA</h2>
+            <h2 class="panel-titulo"> Iniciar Sesión UDLA</h2>
             <form id="login-form">
                 <div class="input-group">
                     <label for="usuario">RUT/Usuario:</label>
@@ -85,7 +84,7 @@
         </section>
 
         <section id="mapa" class="panel oculto">
-            <h2 class="panel-titulo">📍 MAPA DEL CAMPUS</h2>
+            <h2 class="panel-titulo"> MAPA DEL CAMPUS</h2>
             <div class="mapa-contenido">
                 <p>Tu próxima clase es en el **Edificio C**. Utiliza el mapa para guiarte.</p>
                 <img src="imagenes/mapa_campus.jpg" alt="Mapa del Campus" class="imagen-mapa">
@@ -100,4 +99,5 @@
 
     <script src="app.js"></script>
 </body>
+
 </html>
