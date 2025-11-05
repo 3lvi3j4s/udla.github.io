@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App UDLA - Asistente Académico</title>
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+    
+    <span class="menu-toggle" onclick="toggleMenu()">☰</span>
+
+    <div id="sidebar" class="sidebar">
+        <span class="close-btn" onclick="toggleMenu()">×</span>
+        <h3 class="sidebar-title">Menú UDLA</h3>
+        <a href="#" onclick="mostrarVista('horario'); toggleMenu();">🗓️ Horario y Detalles</a>
+        <a href="#" onclick="mostrarVista('mapa'); toggleMenu();">📍 Ver Mapa</a>
+        <a href="#" onclick="cerrarSesion(); toggleMenu();" class="btn-logout">🔑 Cerrar Sesión</a>
+        <div class="sidebar-footer">
+            Asistente IA está flotando 🤖
+        </div>
+    </div>
+    
+    <header class="header">
+        <h1>App Académica UDLA ✨</h1>
+    </header>
+
+    <div class="main-container">
+        
+        <section id="login" class="panel">
+            <h2 class="panel-titulo">🔒 Iniciar Sesión UDLA</h2>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="usuario">RUT/Usuario:</label>
+                    <input type="text" id="usuario" name="usuario" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn-login">Acceder</button>
+                <p id="mensaje-error" class="mensaje-error"></p>
+            </form>
+            <p style="text-align:center; margin-top:15px; font-size:0.9em; color:#999;">
+                Ejemplo 1: 19876543-2 / clases<br>
+                Ejemplo 2: 17123456-7 / udla
+            </p>
+        </section>
+
+        <section id="horario" class="panel oculto">
+            
+            <h2 class="panel-titulo" id="horario-titulo"></h2>
+
+            <div class="horario-grid">
+                
+                <div id="ramo-list" class="ramo-list">
+                    </div>
+
+                <div id="ramo-content" class="ramo-content">
+                    
+                    <div id="carrusel-tarjetas">
+                        </div>
+
+                    <div id="detalle-ramo" class="detalle-ramo oculto-detail">
+                        <h3 id="detalle-ramo-titulo"></h3>
+                        <div class="detalle-seccion">
+                            <h4>📊 Asistencia</h4>
+                            <p id="asistencia-info">Selecciona un ramo de la izquierda.</p>
+                        </div>
+                        <div class="detalle-seccion">
+                            <h4>📝 Notas (Evaluaciones)</h4>
+                            <ul id="notas-lista"></ul>
+                        </div>
+                        <div class="detalle-seccion">
+                            <h4>📣 Avisos del Profesor</h4>
+                            <p id="avisos-info"></p>
+                        </div>
+                        
+                        <button onclick="volverACarrusel()" class="btn-principal btn-volver">
+                            ← Volver a Mi Semana
+                        </button>
+                    </div>
+                </div> 
+            </div>
+        </section>
+
+        <section id="mapa" class="panel oculto">
+            <h2 class="panel-titulo">📍 MAPA DEL CAMPUS</h2>
+            <div class="mapa-contenido">
+                <p>Tu próxima clase es en el **Edificio C**. Utiliza el mapa para guiarte.</p>
+                <img src="imagenes/mapa_campus.jpg" alt="Mapa del Campus" class="imagen-mapa">
+            </div>
+        </section>
+
+    </div>
+    
+    <div id="ai-widget-flotante" class="ocultar-widget">
+        <elevenlabs-convai agent-id="agent_9201k952h6m1efeaest89346vebf"></elevenlabs-convai><script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+        </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,315 @@
+/* Importar Tipografía Moderna */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@400;600;800&display=swap');
+
+/* Paleta de Colores UDLA */
+:root {
+    --naranja-principal: #FF5100;       
+    --naranja-acento: #FF8C00;          
+    --gris-claro: #F4F4F9;              
+    --fondo-tarjeta: #FFFFFF;          
+    --texto-oscuro: #2C3E50;           
+    --texto-suave: #666;
+    --sombra-card: 0 2px 5px rgba(0, 0, 0, 0.08); 
+    --transicion-rapida: 0.3s ease;
+}
+
+/* Base */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--gris-claro);
+    color: var(--texto-oscuro);
+    line-height: 1.5;
+}
+
+/* Encabezado */
+.header {
+    background-color: var(--fondo-tarjeta); 
+    color: var(--texto-oscuro);
+    padding: 20px 15px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); 
+    transition: margin-left var(--transicion-rapida);
+}
+
+.header h1 {
+    font-family: 'Montserrat', sans-serif; 
+    font-weight: 800;
+    font-size: 1.4em;
+    margin: 0;
+    color: var(--naranja-principal); 
+}
+
+/* --- Estilos del Login --- */
+#login {
+    max-width: 400px; 
+    margin: 80px auto; 
+    padding: 30px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: var(--texto-oscuro);
+}
+
+.input-group input[type="text"],
+.input-group input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.btn-login {
+    width: 100%;
+    background-color: var(--naranja-principal);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 6px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-login:hover {
+    background-color: var(--naranja-acento);
+}
+
+.mensaje-error {
+    color: #C0392B; 
+    text-align: center;
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+/* Ocultar el botón de menú cuando estamos en la pantalla de login */
+#login:not(.oculto) ~ .menu-toggle {
+    display: none !important;
+}
+
+/* --- Estilos del Menú Desplegable --- */
+.sidebar {
+    height: 100%; 
+    width: 0; 
+    position: fixed; 
+    z-index: 2000; 
+    top: 0;
+    left: 0;
+    background-color: var(--naranja-principal); 
+    overflow-x: hidden; 
+    transition: width var(--transicion-rapida); 
+    padding-top: 80px; 
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.4); 
+}
+
+.sidebar a {
+    padding: 18px 15px 18px 32px; 
+    text-decoration: none;
+    font-size: 1.05em;
+    color: white;
+    font-weight: 400; 
+    display: block;
+    transition: background-color 0.2s;
+    border-bottom: none; 
+}
+
+.sidebar a:hover {
+    background-color: var(--naranja-acento); 
+}
+
+/* Botón de Cerrar Sesión en el menú */
+.btn-logout {
+    background-color: #C0392B !important; 
+    margin-top: 30px;
+    padding: 15px 32px 15px 32px !important;
+}
+.btn-logout:hover {
+    background-color: #E74C3C !important;
+}
+
+/* Ícono de Hamburguesa */
+.menu-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1001; 
+    color: white; 
+    background-color: var(--naranja-principal); 
+    padding: 8px 12px;
+    border-radius: 6px; 
+    box-shadow: var(--sombra-card);
+    transition: background-color 0.2s;
+    line-height: 1;
+}
+
+/* --- Estructura Principal del Contenido --- */
+.main-container {
+    max-width: 1000px; /* Ancho ampliado para la grilla */
+    margin: 40px auto;
+    padding: 0 20px;
+    transition: margin-left var(--transicion-rapida);
+}
+
+.panel-titulo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3em; 
+    font-weight: 600;
+    color: var(--texto-oscuro);
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    padding: 0;
+}
+
+/* --- DISEÑO DE DOS COLUMNAS (HORARIO) --- */
+.horario-grid {
+    display: grid;
+    grid-template-columns: 250px 1fr; 
+    gap: 30px;
+}
+
+/* Columna Izquierda: Lista de Ramos (Menú Vertical) */
+.ramo-list {
+    background-color: var(--fondo-tarjeta);
+    border-radius: 8px;
+    box-shadow: var(--sombra-card);
+    padding: 20px 0;
+    height: fit-content; 
+}
+
+.lista-titulo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--naranja-principal);
+    padding: 0 20px 10px;
+    border-bottom: 1px solid #eee;
+    margin-top: 0;
+}
+
+.ramo-link {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: var(--texto-oscuro);
+    border-left: 5px solid transparent;
+    transition: background-color 0.2s, border-left-color 0.2s;
+    font-weight: 500;
+    font-size: 0.95em;
+}
+
+.ramo-link:hover, .ramo-link.active {
+    background-color: #FFF5E0;
+    border-left-color: var(--naranja-principal);
+    font-weight: 600;
+}
+
+/* Columna Derecha: Contenido Principal */
+.ramo-content {
+    width: 100%;
+} 
+
+/* --- Carrusel de Tarjetas de Clase (Siempre visible) --- */
+#carrusel-tarjetas {
+    margin-bottom: 30px; 
+}
+.carrusel-horario {
+    display: flex;
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+    gap: 15px; 
+    padding-bottom: 10px; 
+}
+
+/* La Tarjeta Individual (Clase) */
+.clase-item {
+    min-width: 250px; 
+    max-width: 250px;
+    flex-shrink: 0; 
+    background-color: var(--fondo-tarjeta);
+    border-radius: 8px;
+    box-shadow: var(--sombra-card);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s;
+}
+
+/* --- Estilos Detalle del Ramo (Notas/Asistencia) --- */
+.detalle-ramo {
+    background-color: var(--fondo-tarjeta);
+    border-radius: 8px;
+    box-shadow: var(--sombra-card);
+    padding: 25px;
+}
+.detalle-ramo h3 {
+    font-size: 1.4em;
+    color: var(--naranja-principal);
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+.detalle-seccion h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1em;
+    color: var(--texto-oscuro);
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+#notas-lista {
+    list-style: none;
+    padding: 0;
+}
+#notas-lista li {
+    padding: 8px 0;
+    border-bottom: 1px dotted #ddd;
+    font-size: 0.95em;
+}
+
+.btn-volver {
+    margin-top: 25px;
+    width: 100%; 
+    text-align: center;
+}
+
+/* --- Soluciones de Visibilidad y Utilidad --- */
+.panel {
+    background-color: transparent; 
+    border-radius: 10px; 
+    padding: 0;
+    margin-top: 30px; 
+    box-shadow: none; 
+}
+.oculto {
+    display: none !important; 
+}
+.ocultar-widget {
+    display: none !important; 
+}
+
+/* Estilo para ocultar solo el detalle del ramo (dentro del .horario-grid) */
+.oculto-detail {
+    display: none !important; 
+}
+
+/* Asegura que toda la sección se colapse al cambiar de vista */
+#horario.oculto, #mapa.oculto, #login.oculto {
+    padding: 0 !important; 
+    margin: 0 !important; 
+    height: 0 !important;  
+    overflow: hidden !important; 
+}
