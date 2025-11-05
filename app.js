@@ -1,4 +1,3 @@
-// 🛑 1. BASE DE DATOS SIMULADA DE USUARIOS 🛑
 const datosUsuarios = {
     "19876543-2": {
         nombre: "María Soto",
@@ -22,7 +21,6 @@ const datosUsuarios = {
 
 let eventosActuales = []; 
 
-// 🛑 2. BASE DE DATOS SIMULADA DE DETALLES DE RAMOS 🛑
 const datosRamos = {
     "Matemáticas Avanzadas": {
         asistencia: "85% - (4 faltas) - Estado: Regular",
@@ -66,10 +64,6 @@ const datosRamos = {
     }
 };
 
-// -------------------------------------------------------------------------
-// 3. FUNCIONES DE AUTENTICACIÓN
-// -------------------------------------------------------------------------
-
 function iniciarSesion(e) {
     e.preventDefault(); 
     const usuarioInput = document.getElementById('usuario').value.trim();
@@ -102,10 +96,6 @@ function cerrarSesion() {
     mostrarVista('login'); 
     document.getElementById("sidebar").style.width = "0";
 }
-
-// -------------------------------------------------------------------------
-// 4. LÓGICA DE CARGA Y NAVEGACIÓN
-// -------------------------------------------------------------------------
 
 function cargarListaRamos() {
     const listaRamosDiv = document.getElementById('ramo-list');
@@ -163,17 +153,14 @@ function cargarHorario() {
     document.getElementById('detalle-ramo').classList.add('oculto-detail');
 }
 
-// FUNCIÓN AUXILIAR CLAVE PARA EVITAR LA PROPAGACIÓN DEL CLIC (Resuelve el problema del doble despliegue)
 function handleRamoClick(nombreRamo, clickedLink, e) {
     if (e) {
         e.preventDefault(); 
-        e.stopPropagation(); // Detiene el evento para que no sea capturado por el fondo
+        e.stopPropagation(); 
     }
     
-    // Cerramos el menú inmediatamente
     document.getElementById("sidebar").style.width = "0"; 
 
-    // Llamamos a la función principal
     mostrarDetalleRamo(nombreRamo, clickedLink);
 }
 
@@ -181,11 +168,9 @@ function mostrarDetalleRamo(nombreRamo, clickedLink) {
     const detalleRamoData = datosRamos[nombreRamo];
     const detalleRamoDiv = document.getElementById('detalle-ramo');
     
-    // 1. Ocultar el carrusel de tarjetas y mostrar el panel de detalle
     document.getElementById('carrusel-tarjetas').classList.add('oculto-detail');
     detalleRamoDiv.classList.remove('oculto-detail');
 
-    // 2. Marcar el link activo en la lista izquierda
     document.querySelectorAll('.ramo-link').forEach(link => {
         link.classList.remove('active');
     });
@@ -193,14 +178,12 @@ function mostrarDetalleRamo(nombreRamo, clickedLink) {
         clickedLink.classList.add('active');
     }
 
-    // 3. Cargar datos
     document.getElementById('detalle-ramo-titulo').textContent = nombreRamo.toUpperCase();
     
     if (detalleRamoData) {
         document.getElementById('asistencia-info').innerHTML = `<strong>${detalleRamoData.asistencia}</strong>`;
         document.getElementById('avisos-info').textContent = detalleRamoData.avisos;
         
-        // Cargar notas
         const notasLista = document.getElementById('notas-lista');
         notasLista.innerHTML = detalleRamoData.notas.map(n => 
             `<li>${n.nombre}: <strong style="color: ${n.nota >= 5.0 ? 'green' : 'red'};">${n.nota}</strong></li>`
@@ -247,10 +230,6 @@ function toggleMenu() {
     }
 }
 
-// -------------------------------------------------------------------------
-// 5. INICIALIZACIÓN
-// -------------------------------------------------------------------------
-
 function inicializarApp() {
     const usuarioLogueado = sessionStorage.getItem('usuarioLogueado');
     const widgetIA = document.getElementById('ai-widget-flotante');
@@ -271,7 +250,7 @@ function inicializarApp() {
         menuToggle.classList.remove('ocultar-widget'); 
 
     } else {
-        // Pantalla de Login
+    
         mostrarVista('login');
         widgetIA.classList.add('ocultar-widget'); 
         menuToggle.classList.add('ocultar-widget'); 
@@ -280,7 +259,7 @@ function inicializarApp() {
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('login-form').addEventListener('submit', iniciarSesion);
-    // 🛑 ARREGLO FINAL: Usamos el onclick del HTML para abrir el menú 
-    // y evitamos el addEventListener conflictivo aquí.
+    
     inicializarApp(); 
+
 });
