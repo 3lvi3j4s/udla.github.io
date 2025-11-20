@@ -1,64 +1,245 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@400;600;800&display=swap');
 
-
+/* --- Paleta de Colores y Variables --- */
 :root {
-    --naranja-principal: #FF5100;       
-    --naranja-acento: #FF8C00;          
-    --gris-claro: #F4F4F9;              
-    --fondo-tarjeta: #FFFFFF;          
-    --texto-oscuro: #2C3E50;           
+    --naranja-principal: #FF5100;    /* Color principal */
+    --naranja-acento: #FF8C00;       /* Color de acento (hover) */
+    --gris-claro: #F4F4F9;           /* Fondo de la página */
+    --fondo-tarjeta: #FFFFFF;        /* Fondo de tarjetas */
+    --texto-oscuro: #2C3E50;         /* Texto principal */
     --texto-suave: #666;
-    --sombra-card: 0 2px 5px rgba(0, 0, 0, 0.08); 
+    --sombra-card: 0 2px 5px rgba(0, 0, 0, 0.08);
     --transicion-rapida: 0.3s ease;
 }
 
+/* --- Base y Reset --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
     font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
     background-color: var(--gris-claro);
     color: var(--texto-oscuro);
     line-height: 1.5;
+    padding: 0; 
+    margin: 0;
 }
 
+a {
+    text-decoration: none;
+}
 
+/* --- Header y Título --- */
 .header {
-    background-color: var(--fondo-tarjeta); 
+    background-color: var(--fondo-tarjeta);
     color: var(--texto-oscuro);
     padding: 20px 15px;
     text-align: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); 
-    transition: margin-left var(--transicion-rapida);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .header h1 {
-    font-family: 'Montserrat', sans-serif; 
+    font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     font-size: 1.4em;
     margin: 0;
-    color: var(--naranja-principal); 
+    color: var(--naranja-principal);
 }
 
+/* --- Toggle Menú (Botón Hamburguesa) --- */
+.menu-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1001;
+    color: white;
+    background-color: var(--naranja-principal);
+    padding: 8px 12px;
+    border-radius: 6px;
+    box-shadow: var(--sombra-card);
+    transition: background-color 0.2s;
+    line-height: 1;
+}
 
+.menu-toggle.ocultar-widget {
+    display: none;
+}
+
+/* Ocultar botón de menú en la vista de login */
+#login:not(.oculto) ~ .menu-toggle {
+    display: none !important;
+}
+
+/* --- Sidebar (Menú Lateral - Overlay en móvil) --- */
+.sidebar {
+    height: 100%;
+    width: 0; /* Inicialmente cerrado */
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    left: 0;
+    background-color: var(--naranja-principal);
+    overflow-x: hidden;
+    transition: width var(--transicion-rapida);
+    padding-top: 80px;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-title {
+    color: white;
+    padding: 8px 15px 8px 32px;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sidebar a {
+    padding: 18px 15px 18px 32px;
+    text-decoration: none;
+    font-size: 1.05em;
+    color: white;
+    font-weight: 400;
+    display: block;
+    transition: background-color 0.2s;
+    border-bottom: none;
+}
+
+.sidebar a:hover {
+    background-color: var(--naranja-acento);
+}
+
+.sidebar .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 36px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Estilos de Ramos para el SIDEBAR (Solo se usa en móvil) */
+#ramo-list-mobile {
+    display: none; 
+    background-color: transparent;
+    box-shadow: none;
+    padding: 10px 0 20px 0;
+    border-radius: 0;
+    flex-grow: 1;
+}
+.sidebar #ramo-list-mobile {
+     display: block; 
+}
+
+.sidebar #ramo-list-mobile .lista-titulo {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    padding: 0 32px 10px 32px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 1.2em;
+}
+
+.sidebar #ramo-list-mobile .ramo-link {
+    color: white;
+    font-weight: 500;
+    padding: 12px 32px;
+    border-left: none;
+    font-size: 1em;
+}
+
+.sidebar #ramo-list-mobile .ramo-link:hover, .sidebar #ramo-list-mobile .ramo-link.active {
+    background-color: var(--naranja-acento);
+    border-left-color: transparent;
+    font-weight: 600;
+}
+
+.btn-logout {
+    background-color: #C0392B !important;
+    margin-top: auto;
+    padding: 15px 32px 15px 32px !important;
+}
+.btn-logout:hover {
+    background-color: #E74C3C !important;
+}
+
+/* --- Contenedor Principal y Paneles --- */
+.main-container {
+    max-width: 1000px;
+    /* CLAVE: Pegar el contenido al borde izquierdo */
+    margin: 40px 0 0 0; 
+    padding: 0 20px 0 0; 
+    
+    min-height: calc(100vh - 80px); 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.panel-titulo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3em;
+    font-weight: 600;
+    color: var(--texto-oscuro);
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    padding-left: 20px;
+}
+
+.panel {
+    background-color: transparent;
+    padding: 0;
+    margin-top: 30px;
+    box-shadow: none;
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+}
+.oculto {
+    display: none !important;
+}
+.ocultar-widget {
+    display: none !important;
+}
+.oculto-detail {
+    display: none !important;
+}
+
+/* --- Login View (Asegurando el centrado horizontal) --- */
+/* --- Login View (Asegurando el centrado horizontal y vertical) --- */
 #login {
-    max-width: 400px; 
-    margin: 80px auto; 
+    max-width: 400px;
     padding: 30px;
+    background-color: var(--fondo-tarjeta);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+    /* === CLAVE DE CENTRADO ABSOLUTO === */
+    position: fixed; /* O fixed para que se centre en la ventana */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Ajuste de 50% de su propio tamaño */
+    margin: 0; /* Aseguramos que no haya margen que lo desplace */
+    /* ================================== */
 }
 
 .input-group {
     margin-bottom: 20px;
 }
-
 .input-group label {
     display: block;
     margin-bottom: 5px;
     font-weight: 500;
     color: var(--texto-oscuro);
 }
-
 .input-group input[type="text"],
 .input-group input[type="password"] {
     width: 100%;
@@ -82,163 +263,80 @@ body {
     cursor: pointer;
     transition: background-color 0.2s;
 }
-
 .btn-login:hover {
     background-color: var(--naranja-acento);
 }
-
 .mensaje-error {
-    color: #C0392B; 
+    color: #C0392B;
     text-align: center;
     margin-top: 15px;
     font-weight: 500;
 }
 
-
-#login:not(.oculto) ~ .menu-toggle {
-    display: none !important;
-}
-
-
-.sidebar {
-    height: 100%; 
-    width: 0; 
-    position: fixed; 
-    z-index: 2000; 
-    top: 0;
-    left: 0;
-    background-color: var(--naranja-principal); 
-    overflow-x: hidden; 
-    transition: width var(--transicion-rapida); 
-    padding-top: 80px; 
-    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.4); 
-}
-
-.sidebar a {
-    padding: 18px 15px 18px 32px; 
-    text-decoration: none;
-    font-size: 1.05em;
-    color: white;
-    font-weight: 400; 
-    display: block;
-    transition: background-color 0.2s;
-    border-bottom: none; 
-}
-
-.sidebar a:hover {
-    background-color: var(--naranja-acento); 
-}
-
-
-.btn-logout {
-    background-color: #C0392B !important; 
-    margin-top: 30px;
-    padding: 15px 32px 15px 32px !important;
-}
-.btn-logout:hover {
-    background-color: #E74C3C !important;
-}
-
-
-.menu-toggle {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 1001; 
-    color: white; 
-    background-color: var(--naranja-principal); 
-    padding: 8px 12px;
-    border-radius: 6px; 
-    box-shadow: var(--sombra-card);
-    transition: background-color 0.2s;
-    line-height: 1;
-}
-
-
-.main-container {
-    max-width: 1000px; 
-    margin: 40px auto;
-    padding: 0 20px;
-    transition: margin-left var(--transicion-rapida);
-}
-
-.panel-titulo {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.3em; 
-    font-weight: 600;
-    color: var(--texto-oscuro);
-    text-transform: uppercase;
-    margin-bottom: 25px;
-    padding: 0;
-}
-
-
+/* --- Horario/Ramo View (Diseño de DOS COLUMNAS) --- */
 .horario-grid {
     display: grid;
-    grid-template-columns: 250px 1fr; 
+    grid-template-columns: 250px 1fr; /* Columna de Ramos fija + Contenido */
     gap: 30px;
+    flex-grow: 1; 
+    align-items: stretch; 
 }
 
-
-.ramo-list {
+/* Estilos para la lista de ramos en la COLUMNA IZQUIERDA (Escritorio) */
+#ramo-list {
+    display: flex; 
+    flex-direction: column;
+    height: 100%; 
     background-color: var(--fondo-tarjeta);
-    border-radius: 8px;
-    box-shadow: var(--sombra-card);
-    padding: 20px 0;
-    height: fit-content; 
+    padding: 20px 0 20px 0; 
+    border-radius: 0 8px 8px 0; 
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.08); 
 }
-
-.lista-titulo {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.1em;
-    font-weight: 700;
-    color: var(--naranja-principal);
-    padding: 0 20px 10px;
-    border-bottom: 1px solid #eee;
-    margin-top: 0;
-}
-
-.ramo-link {
-    display: block;
-    padding: 12px 20px;
-    text-decoration: none;
-    color: var(--texto-oscuro);
-    border-left: 5px solid transparent;
-    transition: background-color 0.2s, border-left-color 0.2s;
-    font-weight: 500;
-    font-size: 0.95em;
-}
-
-.ramo-link:hover, .ramo-link.active {
-    background-color: #FFF5E0;
-    border-left-color: var(--naranja-principal);
-    font-weight: 600;
-}
-
 
 .ramo-content {
     width: 100%;
-} 
+}
+
+#ramo-list .lista-titulo {
+    color: var(--naranja-principal);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    padding: 0 20px 10px 20px; 
+    border-bottom: 2px solid var(--naranja-acento);
+    font-size: 1.4em; 
+    margin-bottom: 10px;
+}
+#ramo-list .ramo-link {
+    color: var(--texto-oscuro);
+    font-weight: 400;
+    padding: 15px 20px 15px 20px; 
+    font-size: 1.1em; 
+    display: block;
+    transition: background-color 0.2s;
+}
+#ramo-list .ramo-link:hover, #ramo-list .ramo-link.active {
+    background-color: var(--gris-claro); 
+    font-weight: 500;
+    border-left: 3px solid var(--naranja-principal);
+}
 
 
+/* --- Carrusel de Tarjetas (Clases del día) --- */
 #carrusel-tarjetas {
-    margin-bottom: 30px; 
+    margin-bottom: 30px;
 }
 .carrusel-horario {
     display: flex;
-    flex-wrap: nowrap; 
-    overflow-x: auto; 
-    gap: 15px; 
-    padding-bottom: 10px; 
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 15px;
+    padding-bottom: 10px;
 }
 
-
 .clase-item {
-    min-width: 250px; 
+    min-width: 250px;
     max-width: 250px;
-    flex-shrink: 0; 
+    flex-shrink: 0;
     background-color: var(--fondo-tarjeta);
     border-radius: 8px;
     box-shadow: var(--sombra-card);
@@ -249,7 +347,46 @@ body {
     transition: transform 0.2s;
 }
 
+.clase-item:hover {
+    transform: translateY(-3px);
+}
 
+.clase-header {
+    margin-bottom: 10px;
+}
+.clase-detalle {
+    font-size: 0.9em;
+    color: var(--texto-suave);
+    display: block;
+    margin-bottom: 3px;
+    font-weight: 400;
+}
+.clase-detalle.hora {
+    font-size: 1.1em;
+    color: #e74c3c; /* Rojo para la hora */
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+.clase-nombre {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.15em;
+    font-weight: 700;
+    color: var(--texto-oscuro);
+    display: block;
+    line-height: 1.2;
+}
+.clase-footer {
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+.clase-detalle.lugar {
+    font-size: 0.85em;
+    color: var(--texto-suave);
+    text-transform: uppercase;
+    margin-top: 5px;
+}
+
+/* --- Detalle del Ramo --- */
 .detalle-ramo {
     background-color: var(--fondo-tarjeta);
     border-radius: 8px;
@@ -280,37 +417,122 @@ body {
     font-size: 0.95em;
 }
 
+.btn-principal {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: var(--naranja-principal);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-decoration: none;
+}
+
+.btn-principal:hover {
+    background-color: var(--naranja-acento);
+}
+
 .btn-volver {
     margin-top: 25px;
-    width: 100%; 
+    width: 100%;
     text-align: center;
 }
 
-
-.panel {
-    background-color: transparent; 
-    border-radius: 10px; 
-    padding: 0;
-    margin-top: 30px; 
-    box-shadow: none; 
-}
-.oculto {
-    display: none !important; 
-}
-.ocultar-widget {
-    display: none !important; 
+/* --- Mapa View --- */
+.mapa-contenido {
+    background-color: var(--fondo-tarjeta);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: var(--sombra-card);
+    text-align: center;
 }
 
-
-.oculto-detail {
-    display: none !important; 
+.mapa-contenido p {
+    font-size: 1.05em;
+    margin-bottom: 20px;
+    color: var(--texto-oscuro);
 }
 
+.imagen-mapa {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-#horario.oculto, #mapa.oculto, #login.oculto {
-    padding: 0 !important; 
-    margin: 0 !important; 
-    height: 0 !important;  
-    overflow: hidden !important; 
+/* --- AI Widget Flotante --- */
+#ai-widget-flotante {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 12;
+}
 
+/* --- Media Queries (Responsividad) 📱 --- */
+@media (max-width: 768px) {
+    /* Ajustes generales para móvil */
+    .header {
+        padding-left: 70px; 
+        text-align: left;
+    }
+
+    .menu-toggle {
+        top: 15px;
+        left: 15px;
+    }
+
+    .main-container {
+        /* Restaurar padding lateral en móvil */
+        padding: 0 10px; 
+        min-height: auto; 
+        flex-grow: 1;
+    }
+
+    .panel-titulo {
+        font-size: 1.2em;
+        text-align: center;
+        border-bottom: 2px solid var(--naranja-acento);
+        padding-bottom: 5px;
+        padding-left: 0;
+    }
+    
+    /* En móvil, volvemos a diseño de una columna apilada */
+    .horario-grid {
+        display: block; 
+        flex-grow: 1;
+    }
+
+    /* Ocultamos la lista de ramos del contenido principal en móvil */
+    #ramo-list {
+        display: none !important; 
+    }
+
+    /* Carrusel de clases a pantalla parcial */
+    .carrusel-horario {
+        justify-content: flex-start;
+    }
+
+    .clase-item {
+        min-width: 85vw; 
+        max-width: 85vw;
+    }
+
+    /* Detalle Ramo */
+    .detalle-ramo {
+        padding: 20px;
+    }
+
+    .btn-volver {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 100% !important; 
+    }
 }
